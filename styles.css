@@ -1,0 +1,37 @@
+body {
+	background-color: #2b282c;
+	color: white;
+}
+
+.logo {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: bold;
+	font-size: 100px;
+	margin: 0;
+}
+
+img{
+	width: 250px;
+	height:320px;
+}
+
+.card-grid{
+	display: grid;
+	justify-content: left;
+  	grid-template-columns: 15% 15% 15% 15% 15%;
+  	grid-template-rows: auto;
+  	grid-column-gap: 0;
+  	margin: auto;
+  	height: 40em;
+  	overflow-y:auto
+}
+
+.card{
+	transition: transform .2s; /* card magnifying animation timer */
+  	text-align: center;
+}
+
+.card:hover {
+	transform: scale(1.1); /* transform size on hover */
+}
+
