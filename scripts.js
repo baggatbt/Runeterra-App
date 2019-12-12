@@ -1,8 +1,9 @@
 //button runs these functions on click
-let btn = document.getElementById("random-btn");
+const btn = document.getElementById("random-btn");
 btn.addEventListener("click", getNumberOfCards);
 btn.addEventListener("click", RemoveCards);
 btn.addEventListener("click", GenerateRandomNumbers);
+
 
 let numberOfCards;
 
@@ -12,8 +13,6 @@ function getNumberOfCards() {
 	return numberOfCards;
 
 }
-
-
 
 function GenerateRandomNumbers() {
 //Creates an array of 40 unique numbers
