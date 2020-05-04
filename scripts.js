@@ -15945,7 +15945,11 @@ let cardInfo = [
   }
 ]
 
-console.log(cardInfo[1].region);
+
+let championsPicked = 0;
+let numberOfChamps = 0;
+let numberOfCardsPicked = 0;
+const numberOfCardsAllowedInDeck = 40;
 
 
 //Picks two random factions, can pick the same one twice which results in a single faction deck
@@ -15958,99 +15962,78 @@ function pickTwoFactions() {
 	let random2 = factionList[Math.floor(Math.random() * factionList.length)];
 	randomFactionOne = random1;
 	randomFactionTwo = random2;
-	console.log(randomFactionOne);
-	console.log(randomFactionTwo);
+	//console.log(randomFactionOne);
+	//console.log(randomFactionTwo);
+}
+
+//Pick the number of champions to include 1-6
+function pickNumberOfChampions() {
+	numberOfChamps = Math.floor(Math.random() * 6) + 1 
+	console.log(numberOfChamps);
 }
 
 pickTwoFactions();
+console.log("the factions are " + randomFactionOne + " and " + randomFactionTwo);
+pickNumberOfChampions();
+pickChampions();
+pickCards();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-//button runs these functions on click
-const btn = document.getElementById("random-btn");
-btn.addEventListener("click", getNumberOfCards);
-btn.addEventListener("click", RemoveCards);
-btn.addEventListener("click", GenerateRandomNumbers);
-
-
-let numberOfCards;
-
-function getNumberOfCards() {
-
-	numberOfCards = document.getElementsByClassName('card').length;
-	return numberOfCards;
-
+// Currently it loops through cards finding possible champion picks that are allowed based on factions chosen
+function pickChampions() {
+	while (championsPicked < numberOfChamps)
+	for (let i = 0; i < cardInfo.length; i = Math.floor(Math.random() * cardInfo.length)) {
+		if (cardInfo[i].region == (randomFactionOne || randomFactionTwo) && (cardInfo[i].supertype == "Champion" && cardInfo[i].type == "Unit" && cardInfo[i].name != "Eggnivia") ){
+			console.log(cardInfo[i].name);
+			championsPicked++;
+			numberOfCardsPicked++;
+			break;
+		} 
+	}
 }
 
-function GenerateRandomNumbers() {
-//Creates an array of 40 unique numbers
-	var arr = [];
-		while(arr.length < 41){
-  	  		var r = Math.floor(Math.random() * 449) + 1;
-    		if(arr.indexOf(r) === -1) arr.push(r);
+//Fills the rest of the deck with allowed cards
+function pickCards() {
+	while (numberOfCardsPicked < numberOfCardsAllowedInDeck)
+		for (let i = 0; i < cardInfo.length; i = Math.floor(Math.random() * cardInfo.length)) {
+			if (cardInfo[i].region == (randomFactionOne || randomFactionTwo) && (cardInfo[i].supertype != "Champion" && (cardInfo[i].type == "Unit" || cardInfo.type == "Spell")&& cardInfo[i].name != "Eggnivia") ){
+				console.log(cardInfo[i].name);
+				numberOfCardsPicked++;
+				break;
+			} 
 		}
-//Loop through array and pull 40 of those numbers out
-//Use the numbers to pull a card out and generate its parameters
-	for (i=1; i < 41; i++) {
-		let number = arr[i];
-		
-			let img = document.createElement("IMG");
-			img.setAttribute("id", "card");
-			img.setAttribute("class", "card");
-			img.setAttribute("src", "cards/image("+number+").png");
-			document.getElementById("card-grid").appendChild(img);
-		document.getElementsByClassName("card").src = "cards/image("+number+").png";
-	
 	}
-}
-
-//This function removes the old cards to make room for another 40 if the button is pressed more than once
- function RemoveCards() {
-	for(i=0; i < numberOfCards; i++){
-		let cardsToRemove = document.getElementById("card")
-			cardsToRemove.remove();
-			
-	}
-}	
 
 
 
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
