@@ -15984,6 +15984,10 @@ function pickChampions() {
 	for (let i = 0; i < cardInfo.length; i = Math.floor(Math.random() * cardInfo.length)) {
 		if (cardInfo[i].region == (randomFactionOne || randomFactionTwo) && (cardInfo[i].supertype == "Champion" && cardInfo[i].type == "Unit" && cardInfo[i].name != "Eggnivia") ){
 			console.log(cardInfo[i].name);
+			//create IMG elements for the champion cards
+			let img = document.createElement("IMG");
+			img.setAttribute("src",cardInfo[i].assets[0].gameAbsolutePath);
+			document.getElementById("card-grid").appendChild(img);
 			championsPicked++;
 			numberOfCardsPicked++;
 			break;
@@ -15997,13 +16001,31 @@ function pickCards() {
 		for (let i = 0; i < cardInfo.length; i = Math.floor(Math.random() * cardInfo.length)) {
 			if (cardInfo[i].region == (randomFactionOne || randomFactionTwo) && (cardInfo[i].supertype != "Champion" && (cardInfo[i].type == "Unit" || cardInfo.type == "Spell")&& cardInfo[i].name != "Eggnivia") ){
 				console.log(cardInfo[i].name);
+			//create IMG elements for the cards to be loaded into
+				let img = document.createElement("IMG");
+				img.setAttribute("src",cardInfo[i].assets[0].gameAbsolutePath);
+				document.getElementById("card-grid").appendChild(img);
 				numberOfCardsPicked++;
 				break;
 			} 
 		}
 	}
 
+	console.log(cardInfo[0].assets[0].gameAbsolutePath);
 
+function resetDeck() {
+	let imgReset = document.getElementById("card-grid");
+	while (imgReset.hasChildNodes()) {
+		imgReset.removeChild(imgReset.firstChild);
+	}
+}
+
+function makeADeck() {
+	pickTwoFactions();
+	pickNumberOfChampions();
+	pickChampions();
+	pickCards();
+}
 
 
 
